@@ -1,0 +1,100 @@
+aside {
+  margin-top: 5vw;
+  display: flex;
+  align-self: flex-start;
+
+  background-image: linear-gradient(90deg, #ff7b00, #bd4c006b);
+}
+
+ul > div,
+ul > button > div {
+  display: none;
+}
+
+ul > button {
+  width: 10vw;
+  min-width: fit-content;
+  font-size: 2.5vw;
+  font-family: "Smythe";
+  background-color: #bd4b00;
+  border: none;
+  margin: 0.2vw 0;
+}
+
+aside > ul {
+  display: flex;
+  flex-direction: column;
+}
+
+#view {
+  display: flex;
+  align-items: center;
+  margin-left: 5vw;
+}
+#view * {
+  padding: 1vw;
+  text-decoration: none;
+  font-family: "Smythe";
+  color: black;
+  font-size: 2.5vw;
+  border: 0.1vw solid #bd4b00;
+  background-color: #ff7b00;
+}
+
+.articleInventory {
+  z-index: 0;
+  padding-top: 1px;
+
+  background-image: url("../../public/Images/Background_Inventory.jpg");
+  background-repeat: no-repeat;
+  background-position: 35% 55%;
+
+  animation-duration: 320s;
+  animation-iteration-count: infinite;
+  animation-name: backgroundMove;
+}
+
+.articleInventory h1 {
+  margin-top: 6vw;
+  text-shadow: 0.2vw 0.2vw 0.4vw #000000;
+
+  padding: 0.5vw;
+
+  font-family: "Smythe";
+  font-weight: 300;
+  font-size: 5vw;
+}
+.open,
+ul > button:hover {
+  background-color: rgb(255, 94, 0);
+  box-shadow: 0.1vw 0.1vw 0.15vw #000000;
+  transform: translateY(-0.1vw) scale(1.01);
+
+  transition: all 0.1s;
+}
+
+#view > a:hover {
+  background-color: #bd4b00;
+  transform: translateY(-0.25vw) scale(1.05);
+  border-radius: 0.1vw;
+  box-shadow: 0.2vw 0.2vw 0.4vw #000000;
+  transition: all 0.2s;
+}
+
+.footer {
+  background-color: #ff7b00;
+  padding: 2vw;
+  margin-bottom: 0;
+}
+
+@keyframes backgroundMove {
+  0% {
+    background-position: 35% 55%;
+  }
+  50% {
+    background-position: 75% 75%;
+  }
+  100% {
+    background-position: 35% 55%;
+  }
+} ;
