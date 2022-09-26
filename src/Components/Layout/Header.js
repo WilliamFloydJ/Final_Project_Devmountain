@@ -1,5 +1,5 @@
 import React from "react";
-import "../Css/Header.css";
+import "../../Css/Header.css";
 
 function Header() {
   document.documentElement.dataset.scroll = window.scrollY;

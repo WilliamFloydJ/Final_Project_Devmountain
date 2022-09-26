@@ -1,8 +1,8 @@
 import React from "react";
 import SideBar from "./Inventory.SideBar.js";
-import InventoryHeader from "../Components/Inventory.Header";
+import InventoryHeader from "./Inventory.Header";
 
-import "../Css/Inventory.css";
+import "../../Css/Inventory.css";
 
 function Inventory() {
   return (

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import "../Css/Inventory.css";
+import "../../Css/Inventory.css";
 
 function SideBar() {
   const [dropDown, setDropDown] = useState([]);

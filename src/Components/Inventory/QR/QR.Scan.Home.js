@@ -1,15 +1,18 @@
 import axios from "axios";
 import React, { useState } from "react";
 import QrScanner from "qr-scanner";
-import "../Css/QR.css";
+import "../../../Css/QR.css";
 
 function QRScanHome() {
-  let scannerBool = null;
+  let scannerBool = false;
   function qrScanner(e) {
-    const qrCodeFile = document.getElementById("QrCodeFile");
     const backButton = document.createElement("button");
+
+    const qrScannerBtn = document.getElementById("qrScanner");
+    const qrCodeFile = document.getElementById("QrCodeFile");
     const orH2 = document.getElementById("or");
 
+    qrScannerBtn.classList.add("displayNone");
     orH2.classList.add("displayNone");
     qrCodeFile.classList.add("displayNone");
 
@@ -21,15 +24,22 @@ function QRScanHome() {
 
     const manager = document.getElementById("fileManager");
 
-    backButton.click = () => {
+    backButton.onclick = () => {
       window.location.reload();
     };
+    backButton.innerText = "Back";
 
     manager.appendChild(video);
     manager.appendChild(backButton);
 
-    const qRScanner = new QrScanner(video, (res) =>
-      console.log("decoded qr code:", res)
+    const qRScanner = new QrScanner(
+      video,
+      (res) => console.log("decoded qr code:", res.data),
+      {
+        highlightScanRegion: true,
+        highlightCodeOutline: true,
+        returnDetailedScanResult: true,
+      }
     );
 
     qRScanner.start();
@@ -59,9 +69,7 @@ function QRScanHome() {
   }
   return (
     <form onSubmit={submissionHandle} className="ScanHome">
-      <div id="fileManager">
-        <button onClick={qrScanner}>qrScanner</button>
-        <h2>OR</h2>
+      <div id="fileManager" className="fileManager">
         <input
           id="QrCodeFile"
           name="file"
@@ -71,6 +79,10 @@ function QRScanHome() {
           }}
           accept={".png, .gif, .jpeg, .jpg"}
         />
+        <h2 id="or">OR</h2>
+        <button onClick={scannerBool ? null : qrScanner} id="qrScanner">
+          qrScanner
+        </button>
       </div>
 
       <input type="submit" value="Read QR code" />

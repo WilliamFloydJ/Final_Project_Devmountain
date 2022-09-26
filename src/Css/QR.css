@@ -53,13 +53,20 @@ option:hover {
 }
 .displayFlex {
   display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+}
+.displayFlex > input {
+  min-height: fit-content;
+  max-height: 3vw;
 }
 
 #Container h2 {
   padding-left: 2vw;
 }
 
-#fileManager {
+.fileManager {
   display: flex;
   flex-direction: column;
   align-items: center;

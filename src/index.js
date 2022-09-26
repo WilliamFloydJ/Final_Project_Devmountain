@@ -4,9 +4,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import HomePage from "./Pages/HomePage";
 import AboutPage from "./Pages/AboutPage";
+import AccountPage from "./Pages/AccountPage";
 import Inventory from "./Pages/InventoryPage";
-import QRScan from "./Pages/QR.Scan";
-import QRCreate from "./Pages/QR.Create";
+import QRScan from "./Pages/QR.Scan.Page";
+import QRCreate from "./Pages/QR.Create.Page";
 
 import reportWebVitals from "./reportWebVitals";
 
@@ -17,6 +18,7 @@ root.render(
       <Route path="/">
         <Route index element={<HomePage />} />
         <Route path="About" element={<AboutPage />} />
+        <Route path="Account" element={<AccountPage />} />
       </Route>
       <Route path="/Inventory">
         <Route index element={<Inventory />} />

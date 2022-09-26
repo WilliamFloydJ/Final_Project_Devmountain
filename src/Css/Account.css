@@ -1,0 +1,25 @@
+#Login {
+  margin-top: 10vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#Login > form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#Login > form > * {
+  margin: 0.5vw 0 0.5vw 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+a {
+  text-decoration: none;
+  color: black;
+}

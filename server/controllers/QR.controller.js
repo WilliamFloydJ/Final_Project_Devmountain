@@ -1,4 +1,5 @@
 const axios = require("axios");
+require("dotenv").config();
 const QrCode = require("qrcode-reader");
 const Jimp = require("jimp");
 const fs = require("fs");
@@ -42,7 +43,7 @@ module.exports = {
 
     switch (createArr.length) {
       case 1:
-
+        console.error("Error In Creation of Location");
       case 2:
 
       case 3:
@@ -51,5 +52,22 @@ module.exports = {
     }
 
     res.status(200);
+  },
+  Login: (req, res) => {
+    const { email, password } = req.fields;
+
+    sequelize
+      .query(
+        `SELECT * FROM USERS WHERE email = '${email}' AND password = '${password}';`
+      )
+      .then((seq) => {
+        console.log(seq[0]);
+        res.status(200).redirect("/Account");
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(400);
+      });
+    // insert into users (password, email, subscription_plan) Values ('Colton2020', 'floydfamily71@gmail.com', 20);
   },
 };

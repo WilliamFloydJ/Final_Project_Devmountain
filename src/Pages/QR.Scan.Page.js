@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
-import QRScanHome from "../Components/QR.Scan.Home";
+import Header from "../Components/Layout/Header";
+import Footer from "../Components/Layout/Footer";
+import QRScanHome from "../Components/Inventory/QR/QR.Scan.Home";
 
 function QRScan() {
   return (
