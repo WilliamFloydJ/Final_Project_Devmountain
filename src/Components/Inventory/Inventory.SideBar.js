@@ -8,8 +8,6 @@ function SideBar() {
 
   function dropDownOpen(dropDownName) {
     if (previousDropName !== "") {
-      console.log(document.getElementById(previousDropName));
-      console.log(dropDown);
       document
         .getElementById(previousDropName)
         .parentElement.classList.remove("open");
@@ -27,7 +25,7 @@ function SideBar() {
           <div id="QR">
             <a href="/Inventory/QRScan">Scan QR</a>
 
-            <a href="/Inventory/QRCreation">Create QR</a>
+            <a href="/Inventory/QRRecovery">Recover QR</a>
           </div>
         </button>
         <button onClick={(event) => dropDownOpen("inventory")}>

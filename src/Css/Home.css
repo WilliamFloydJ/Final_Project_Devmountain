@@ -63,3 +63,20 @@ html:not([data-scroll="0"]) article {
   transition: translateY 0.25s;
   z-index: 0;
 }
+
+.footer {
+  margin-top: auto;
+  font-size: 1vw;
+  background-color: #ff7b00;
+  padding: 2vw;
+  margin-bottom: 0;
+}
+
+.ScanHome input:-webkit-autofill,
+.ScanHome input:-webkit-autofill:hover,
+.ScanHome input:-webkit-autofill:focus,
+.ScanHome input:-webkit-autofill:active {
+  box-shadow: 0.1vw 0.1vw 0.15vw #000000;
+  -webkit-box-shadow: 0 0 0 1000px #b84900 inset !important;
+  /* background-color: #ff7b00 !important; */
+}

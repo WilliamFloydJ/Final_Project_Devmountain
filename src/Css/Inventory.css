@@ -81,10 +81,89 @@ ul > button:hover {
   transition: all 0.2s;
 }
 
-.footer {
+.InventoryForm {
+  margin-bottom: auto;
+}
+
+.qrCreationLink {
+  position: absolute;
+  bottom: 5.5vw;
+  right: 2vw;
+  background-color: #ff9100;
+  border: #bd4b00 0.3vw solid;
+  border-radius: 1vw;
+  padding: 1vw;
+  font-size: 2vw;
+  font-family: "Smythe";
+  min-width: 10vw;
+  box-shadow: 0.1vw 0.1vw 0.15vw #000000;
+  margin-top: 1.5vw;
+}
+
+.screenHeight {
+  height: 100vh;
+}
+
+.grid {
+  margin-top: 3vw;
+  box-shadow: 0.1vw 0.2vw 0.25vw #000000;
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.title:hover {
+  cursor: pointer;
+  box-shadow: 0.1vw 0.2vw 0.25vw #000000;
+  transition: all 0.2s;
+}
+.shift0 {
+  margin-left: 0;
+}
+.shift1 {
+  margin-top: 0;
+  margin-left: 8vw;
+}
+.shift2 {
+  margin-top: 0;
+  margin-left: 16vw;
+}
+.shift3 {
+  margin-top: 0;
+  margin-left: 24vw;
+}
+
+.highlight {
+  background-color: #bd4b00 !important;
+}
+
+.cell,
+.header {
+  max-width: 20vw;
+  font-family: "Smythe";
+  box-shadow: inset 0.1vw 0.2vw 0.25vw #000000;
+  padding: 0.5vw;
+  font-size: 2.5vw;
   background-color: #ff7b00;
-  padding: 2vw;
-  margin-bottom: 0;
+  border: rgb(255, 94, 0) solid 0.1vw;
+  transition: all 1s;
+}
+
+.self {
+  text-align: center;
+  background-color: #e65c00e3;
+}
+
+.header {
+  min-width: 8vw;
+
+  box-shadow: inset 0.05vw 0.15vw 0.2vw #000000;
+  font-weight: bold;
+  text-align: center;
+  background-color: #ff9100;
+}
+
+html:not([data-scroll="0"]) .qrCreationLink {
+  bottom: 2vw;
 }
 
 @keyframes backgroundMove {

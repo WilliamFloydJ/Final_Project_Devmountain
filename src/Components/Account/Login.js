@@ -1,14 +1,29 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "../../Css/Account.css";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  async function loginSubmission(e) {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
+
+    const res = await axios.post("/api/Login", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
+    console.log(res.data);
+    document.location.reload();
+  }
+
   return (
     <div id="Login">
-      <h1>Hello Please Provide Your Email And Password</h1>
-      <form action="/api/Login" method="post">
+      <h1>Login:</h1>
+      <form onSubmit={loginSubmission}>
         <div>
           <label htmlFor="email">Email:</label>
           <input
@@ -35,8 +50,9 @@ function Login() {
             }}
           />
         </div>
-        <input type={"submit"} value="Submit" />
+        <input type={"submit"} value="Login" />
       </form>
+      <a href="/CreateAccount">Create Account</a>
     </div>
   );
 }

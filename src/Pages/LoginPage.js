@@ -1,17 +1,17 @@
 import Header from "../Components/Layout/Header";
 import Footer from "../Components/Layout/Footer";
-import Account from "../Components/Account/Account";
+import Login from "../Components/Account/Login";
 
 import "../Css/Account.css";
 
-function AccountPage() {
+function LoginPage() {
   return (
-    <div className="backgroundColor">
+    <div className="backgroundColor screenHeight">
       <Header />
-      <Account />
+      <Login />
       <Footer />
     </div>
   );
 }
 
-export default AccountPage;
+export default LoginPage;

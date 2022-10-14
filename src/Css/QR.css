@@ -1,18 +1,18 @@
 .ScanHome {
-  padding-top: 10vw;
-  padding-bottom: 3vw;
+  padding-top: 14vw;
+  padding-bottom: 14vw;
   background-color: rgb(233, 148, 21);
   display: flex;
   align-items: center;
   justify-content: space-evenly;
 }
-.ScanHome img {
+.ScanHome > img {
   border-radius: 1vw;
   width: 10vw;
   height: auto;
   transition: all 2s;
 }
-.ScanHome img:hover {
+.ScanHome > img:hover {
   border-radius: 1.2vw;
   width: 14vw;
   height: auto;
@@ -29,7 +29,7 @@
   box-shadow: inset 0.1vw 0.2vw 0.2vw #000000;
   transition: all 0.2s;
   font-family: "Smythe";
-  font-size: 2vw;
+  font-size: 1.5vw;
 }
 
 .ScanHome input::placeholder {
@@ -62,10 +62,6 @@ option:hover {
   max-height: 3vw;
 }
 
-#Container h2 {
-  padding-left: 2vw;
-}
-
 .fileManager {
   display: flex;
   flex-direction: column;
@@ -77,4 +73,81 @@ video,
 canvas {
   margin-top: 0.5vw;
   margin-bottom: 00.5vw;
+}
+
+.scanOutline {
+  position: absolute;
+  margin: auto;
+  top: 1vw;
+  left: 1vw;
+  bottom: 1vw;
+  right: 1vw;
+}
+
+.videoContainer {
+  position: relative;
+}
+.videoContainer > img {
+  opacity: 0.5;
+  transition: all 1s;
+  border-radius: 1vw;
+  width: 10vw;
+  height: auto;
+}
+.videoContainer > img:hover {
+  width: 11vw;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.width {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.space-out {
+  margin-left: 2vw;
+}
+.space-outTop {
+  margin-top: 1vw;
+}
+.space-outTopHeavy {
+  margin-top: 2.6vw;
+}
+.locationText {
+  text-align: center;
+
+  font-size: 3vw;
+  font-weight: 300;
+  text-shadow: #532600 0.1vw 0.1vw 0.15vw;
+}
+.text {
+  text-align: center;
+  font-family: "Smythe";
+  font-size: 4vw;
+  font-weight: 300;
+  text-shadow: #532600 0.1vw 0.1vw 0.15vw;
+}
+.groupColor {
+  border-radius: 0.5vw;
+  padding: 0.5vw;
+  background-color: #ff7b00;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 1vw;
+  box-shadow: inset 0.1vw 0.2vw 0.2vw #000000;
+}
+label {
+  text-align: center;
+  font-family: "Smythe";
+  font-size: 2vw;
+  font-weight: 300;
+  text-shadow: #532600 0.05vw 0.05vw 0.075vw;
 }

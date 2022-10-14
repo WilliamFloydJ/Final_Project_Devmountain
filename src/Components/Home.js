@@ -1,5 +1,5 @@
 import React from "react";
-
+import isLoggedIn from "../Functions/isLoggedIn";
 import "../Css/Home.css";
 
 function Home() {

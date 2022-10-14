@@ -1,4 +1,3 @@
-const axios = require("axios");
 require("dotenv").config();
 const QrCode = require("qrcode-reader");
 const Jimp = require("jimp");
@@ -27,47 +26,72 @@ module.exports = {
           console.error(err);
         }
         let readValue = value.result;
-        if (req.fields.type === "axios") {
-          res.status(200).send(readValue);
-        } else {
-          res.status(200).redirect(readValue);
-        }
+
+        res.status(200).send(readValue);
       };
       qr.decode(image.bitmap);
     });
   },
   QrCreate: (req, res) => {
-    const { body } = req;
+    const { fields } = req;
+    const { id } = req.session.user;
 
-    const createArr = body.split("/");
+    const createArr = fields.data.split("@");
 
-    switch (createArr.length) {
-      case 1:
+    switch (fields.type) {
+      case "company":
+        sequelize.query(
+          `Insert Into company_names(user_id,name,description) values (${id},'${
+            createArr[createArr.length - 1]
+          }','${fields.description}')`
+        );
+        break;
+      case "warehouse":
+        sequelize.query(
+          `Insert Into warehouse_names(user_id,name,parent_location,description) values (${id},'${
+            createArr[createArr.length - 1]
+          }','${createArr[createArr.length - 2]} company','${
+            fields.description
+          }')`
+        );
+        break;
+      case "location":
+        sequelize.query(
+          `Insert Into location_names(user_id,name,parent_location,description) values (${id},'${
+            createArr[createArr.length - 1]
+          }','${createArr[createArr.length - 2]} warehouse','${
+            fields.description
+          }')`
+        );
+        break;
+      case "box":
+        sequelize.query(
+          `Insert Into box_names(user_id,name,parent_location,description,item_name) values (${id},'${
+            createArr[createArr.length - 1]
+          }','${createArr[createArr.length - 2]} ${
+            createArr.length === 4 ? "location" : "warehouse"
+          }','${fields.description}','${fields.itemId}')`
+        );
+        break;
+      case "product":
+        sequelize.query(
+          `Insert Into product_names(user_id,name,parent_location,description,item_name) values (${id},'${
+            createArr[createArr.length - 1]
+          }','${createArr[createArr.length - 2]} ${
+            createArr.length === 5
+              ? "box"
+              : createArr.length === 4
+              ? "location"
+              : "warehouse"
+          }','${fields.description}','${fields.itemId}')`
+        );
+        break;
+
+      default:
         console.error("Error In Creation of Location");
-      case 2:
-
-      case 3:
-
-      case 4:
+        break;
     }
 
-    res.status(200);
-  },
-  Login: (req, res) => {
-    const { email, password } = req.fields;
-
-    sequelize
-      .query(
-        `SELECT * FROM USERS WHERE email = '${email}' AND password = '${password}';`
-      )
-      .then((seq) => {
-        console.log(seq[0]);
-        res.status(200).redirect("/Account");
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(400);
-      });
-    // insert into users (password, email, subscription_plan) Values ('Colton2020', 'floydfamily71@gmail.com', 20);
+    res.status(200).send("Location Created");
   },
 };

@@ -28,15 +28,33 @@ const PORT = 5000;
 
 const { QrRead, QrCreate } = require("./controllers/QR.controller");
 
-const { Login, Session } = require("./controllers/Account.controller");
+const {
+  Login,
+  Session,
+  UserList,
+  CreateAccount,
+  EmailVerify,
+  Search,
+  LocationCheck,
+} = require("./controllers/Account.controller");
 
 app.post("/api/QrRead", QrRead);
 
-app.get("/api/QrCreate", QrCreate);
+app.post("/api/QrCreate", QrCreate);
 
 app.post("/api/Login", Login);
 
+app.post("/api/CreateAccount", CreateAccount);
+
+app.get("/api/Users", UserList);
+
+app.get("/api/EmailVerify/:id", EmailVerify);
+
 app.get("/api/Session", Session);
+
+app.get("/api/InventorySearch", Search);
+
+app.get("/api/LocationCheck/:location", LocationCheck);
 
 app.listen(PORT, () => {
   console.log(chalk.blue(`Listening on Port ${PORT}`));

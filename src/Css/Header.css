@@ -1,5 +1,6 @@
 header {
   display: flex;
+  justify-content: flex-end;
   position: absolute;
   top: 0;
   left: 0;
@@ -33,7 +34,8 @@ header img {
 }
 
 header nav {
-  margin-left: 25vw;
+  margin-left: 15vw;
+  margin-right: 5vw;
 }
 
 header > ul > nav > ul > a {
