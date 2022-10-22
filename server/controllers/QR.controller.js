@@ -66,11 +66,11 @@ module.exports = {
         break;
       case "box":
         sequelize.query(
-          `Insert Into box_names(user_id,name,parent_location,description,item_name) values (${id},'${
+          `Insert Into box_names(user_id,name,parent_location,description,item_name,quantity) values (${id},'${
             createArr[createArr.length - 1]
           }','${createArr[createArr.length - 2]} ${
             createArr.length === 4 ? "location" : "warehouse"
-          }','${fields.description}','${fields.itemId}')`
+          }','${fields.description}','${fields.itemId}',${fields.quantity})`
         );
         break;
       case "product":

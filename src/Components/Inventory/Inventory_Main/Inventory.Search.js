@@ -9,6 +9,7 @@ function InventorySearch() {
   const [fileBool, setFileBool] = useState(false);
 
   const options = [
+    { value: "itemid_names", label: "Item Id's" },
     { value: "product_names", label: "Individual Product" },
     { value: "box_names", label: "Container - Smallest Storage Method" },
     {
@@ -30,7 +31,7 @@ function InventorySearch() {
       onSubmit={(e) =>
         InventorySearchSub(e, query, containerOption, 0, scannerBool, fileBool)
       }
-      className="ScanHome column"
+      className="ScanHome column InventorySearch"
       id="Search"
     >
       <h1 className="text">Inventory Search</h1>

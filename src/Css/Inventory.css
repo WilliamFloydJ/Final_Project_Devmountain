@@ -25,6 +25,18 @@ aside > ul {
   display: flex;
   flex-direction: column;
 }
+article p {
+  font-size: 2vw;
+  text-shadow: #000000 0.1vw 0.1vw 0.2vw;
+  padding: 2vw;
+  font-family: "Smythe";
+  background-color: #bd4c0098;
+}
+
+textarea {
+  width: 10vw;
+  font-size: 1vw;
+}
 
 #view {
   display: flex;
@@ -104,11 +116,39 @@ ul > button:hover {
   height: 100vh;
 }
 
+.height {
+  height: 30vh;
+}
+
 .grid {
   margin-top: 3vw;
   box-shadow: 0.1vw 0.2vw 0.25vw #000000;
   display: grid;
   grid-template-columns: auto auto auto;
+}
+
+.grid4 {
+  grid-template-columns: auto auto auto auto !important;
+}
+
+.grid5 {
+  grid-template-columns: auto auto auto auto auto !important;
+}
+
+.grid6 {
+  grid-template-columns: auto auto auto auto auto auto !important;
+}
+
+.grid7 {
+  grid-template-columns: auto auto auto auto auto auto auto !important;
+}
+
+.grid1 {
+  grid-template-columns: auto !important;
+}
+
+#item_def {
+  margin-top: 0 !important;
 }
 
 .title:hover {
@@ -160,6 +200,29 @@ ul > button:hover {
   font-weight: bold;
   text-align: center;
   background-color: #ff9100;
+}
+
+.switchBackground {
+  background-color: #bd4b00;
+  padding: 1vw;
+  border-radius: 0.2vw;
+  margin: 1vw;
+}
+
+.switchBackground * {
+  font-size: 2.5vw !important;
+  margin: 0.5vw 0 0.5vw 0;
+}
+
+.deliveryCreate {
+  background-image: linear-gradient(
+    to right,
+    rgb(255, 72, 0),
+    rgb(255, 136, 0)
+  );
+  margin: 0 0.2vw 0 0.2vw;
+  border-radius: 0.5vw;
+  padding: 1vw;
 }
 
 html:not([data-scroll="0"]) .qrCreationLink {

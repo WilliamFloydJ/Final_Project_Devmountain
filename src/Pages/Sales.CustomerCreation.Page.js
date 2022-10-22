@@ -1,16 +1,16 @@
 import React from "react";
 import Header from "../Components/Layout/Header";
 import Footer from "../Components/Layout/Footer";
-import QRScanHome from "../Components/Inventory/QR/QR.Scan.Home";
+import CustomerCreation from "../Components/Inventory/Sales/CustomerCreation";
 
-function QRScan() {
+function CustomerCreationPage() {
   return (
     <div className="backgroundColor">
       <Header />
-      <QRScanHome />
+      <CustomerCreation />
       <Footer />
     </div>
   );
 }
 
-export default QRScan;
+export default CustomerCreationPage;

@@ -2,7 +2,7 @@ import React from "react";
 
 function InventoryHeader() {
   return (
-    <div>
+    <div className="height">
       <h1>Inventory Manager:</h1>
     </div>
   );

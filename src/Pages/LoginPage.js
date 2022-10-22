@@ -6,7 +6,7 @@ import "../Css/Account.css";
 
 function LoginPage() {
   return (
-    <div className="backgroundColor screenHeight">
+    <div className="backgroundColor">
       <Header />
       <Login />
       <Footer />

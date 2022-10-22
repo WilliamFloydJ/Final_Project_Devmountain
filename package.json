@@ -16,7 +16,9 @@
     "express-formidable": "^1.2.0",
     "express-session": "^1.17.3",
     "file-saver": "^2.0.5",
+    "html2pdf.js": "^0.10.1",
     "jimp": "^0.16.1",
+    "jspdf": "^2.5.1",
     "node-blob": "^0.0.2",
     "nodemon": "^2.0.19",
     "pg": "^8.8.0",
@@ -27,7 +29,8 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "sequelize": "^6.21.4",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xml-to-pdf": "^1.4.2"
   },
   "scripts": {
     "dev": "concurrently \"npm run server-dev\" \"npm run start\"",

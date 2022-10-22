@@ -36,6 +36,13 @@ const {
   EmailVerify,
   Search,
   LocationCheck,
+  ItemId,
+  ItemCheck,
+  ItemSearch,
+  LocationTransfer,
+  Sales,
+  SalesQuery,
+  UpdatePassword,
 } = require("./controllers/Account.controller");
 
 app.post("/api/QrRead", QrRead);
@@ -46,6 +53,18 @@ app.post("/api/Login", Login);
 
 app.post("/api/CreateAccount", CreateAccount);
 
+app.put("/api/Password/:password/:newPassword", UpdatePassword);
+
+app.post("/api/ItemId", ItemId);
+
+app.post("/api/Sales", Sales);
+
+app.get("/api/Sales/:query/:type/:filter", SalesQuery);
+
+app.get("/api/ItemCheck/:itemId", ItemCheck);
+
+app.get("/api/ItemSearch/:itemId", ItemSearch);
+
 app.get("/api/Users", UserList);
 
 app.get("/api/EmailVerify/:id", EmailVerify);
@@ -55,6 +74,8 @@ app.get("/api/Session", Session);
 app.get("/api/InventorySearch", Search);
 
 app.get("/api/LocationCheck/:location", LocationCheck);
+
+app.put("/api/Transfer/:from/:to", LocationTransfer);
 
 app.listen(PORT, () => {
   console.log(chalk.blue(`Listening on Port ${PORT}`));

@@ -9,14 +9,31 @@ function QrRecoveryHomeSection(props) {
   return (
     <div id={props.name} className="displayNone">
       <div id={props.name + "Container"} className="displayFlex">
-        <input
-          type={"text"}
-          value={props.product}
-          onChange={(e) => {
-            props.setProduct(e.target.value);
-          }}
-          placeholder={props.name + "ID"}
-        />
+        <div className="fitContent">
+          <input
+            type={"text"}
+            value={props.product}
+            onChange={(e) => {
+              props.setProduct(e.target.value);
+            }}
+            placeholder={props.name + "ID"}
+          />
+          {props.displayQty ? (
+            <div>
+              <label htmlFor="quantity">Quantity:</label>
+              <input
+                type={"number"}
+                value={props.quantity}
+                name="quantity"
+                onChange={(e) => {
+                  props.setQuantity(e.target.value);
+                }}
+                placeholder={props.name + " Quantity"}
+              />
+            </div>
+          ) : null}
+        </div>
+
         <div
           className={props.displayDesc ? "groupColor space-out" : "displayNone"}
           id="createDes"

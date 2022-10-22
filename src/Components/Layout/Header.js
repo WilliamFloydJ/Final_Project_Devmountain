@@ -16,9 +16,8 @@ function Header() {
         <nav>
           <ul>
             <a href="/About">About</a>
-            <a href="/Account">Account</a>
             <a href="/Inventory">Inventory</a>
-            <a href="/Contact">Contact</a>
+            <a href="/Account">Account</a>
           </ul>
         </nav>
       </ul>

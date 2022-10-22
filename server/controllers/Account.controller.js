@@ -31,10 +31,10 @@ module.exports = {
 
             res.status(200).send(req.session.user);
           } else {
-            res.send("password did not match");
+            res.status(204).send("Password Did Not Match");
           }
         } else {
-          res.send("no email equals that");
+          res.status(204).send("No Email Equals That");
         }
       })
       .catch((err) => {
@@ -51,19 +51,59 @@ module.exports = {
       `SELECT * from USERS where email = '${email}';`
     );
 
-    if (users[0].length > 0) {
+    if (users[0].length > 0 === false) {
       sequelize.query(
         `insert into users (password, email, subscription_plan, company_name) Values ('${hash}', '${email}', 20, '${company}');`
       );
-      req.session.user = {
-        id: users[0][0].user_id,
-        email: users[0][0].email,
-        password: users[0][0].password,
-        subscription_plan: users[0][0].subscription_plan,
-      };
-      res.status(200).send(req.session.user);
+      res.status(200).redirect("/Inventory");
     } else {
       res.status(400).send("User with that Email Already Exists");
+    }
+  },
+  UpdatePassword: async (req, res) => {
+    const { password, newPassword } = req.params;
+    const seqPassword = await sequelize.query(
+      `Select password from users where user_id = ${req.session.user.id}`
+    );
+    if (bcrypt.compareSync(password, seqPassword[0][0].password)) {
+      sequelize.query(
+        `update users set password = ${newPassword} where user_id = ${req.session.user.id}`
+      );
+      res.status(200).send("Updated Password");
+    }
+    res.status(204);
+  },
+  ItemId: async (req, res) => {
+    const { itemId, description } = req.fields;
+
+    const item = await sequelize.query(
+      `Insert Into itemid_names (itemid, description, user_id) Values ('${itemId}', '${description}', ${req.session.user.id})`
+    );
+
+    res.status(200).send("ItemId Created");
+  },
+  ItemSearch: async (req, res) => {
+    const { itemId } = req.params;
+
+    const item = await sequelize.query(
+      `Select description from itemid_names where itemid = '${itemId}'`
+    );
+
+    res.status(200).send(item);
+  },
+  ItemCheck: async (req, res) => {
+    const { itemId } = req.params;
+
+    console.log(req.params);
+
+    const item = await sequelize.query(
+      `Select * from itemid_names where itemid = '${itemId}' And user_id = ${req.session.user.id}`
+    );
+
+    if (item[0].length > 0) {
+      res.status(200).send(false);
+    } else {
+      res.status(200).send(true);
     }
   },
   Session: (req, res) => {
@@ -100,6 +140,7 @@ module.exports = {
           );
 
           sendData.seq = compSeq;
+          sendData.column = filter;
           sendData.location = compLocation;
           sendData.type = "warehouse_names";
           res.status(200).send(sendData);
@@ -114,6 +155,7 @@ module.exports = {
           );
 
           sendData.seq = wareSeq;
+          sendData.column = filter;
           sendData.type = "location_names";
           sendData.location = wareLocation;
           res.status(200).send(sendData);
@@ -128,6 +170,7 @@ module.exports = {
           );
 
           sendData.seq = locSeq;
+          sendData.column = filter;
           sendData.type = "box_names";
           sendData.location = location;
           res.status(200).send(sendData);
@@ -143,7 +186,8 @@ module.exports = {
 
           sendData.seq = boxSeq;
           sendData.type = "product_names";
-          sendData.location = boxLocation;
+          sendData.column = filter;
+          sendData.itemId = sendData.location = boxLocation;
           res.status(200).send(sendData);
           break;
 
@@ -153,6 +197,26 @@ module.exports = {
           );
           sendData.location = proSeq;
           res.status(200).send(sendData);
+          break;
+        case "itemid_names":
+          const idLocation = await sequelize.query(
+            `Select * From ${filter} Where itemid='${query}' AND user_id=${session.user.id}`
+          );
+          const idSeqProduct = await sequelize.query(
+            `Select * From product_names where item_name = '${query}' And user_id=${session.user.id}`
+          );
+          const idSeqBox = await sequelize.query(
+            `Select * From box_names where item_name = '${query}' And user_id=${session.user.id}`
+          );
+          sendData.location = idLocation;
+          sendData.column = filter;
+          sendData.seqProduct = idSeqProduct;
+          sendData.seqBox = idSeqBox;
+          res.status(200).send(sendData);
+          break;
+
+        default:
+          res.status(200);
           break;
       }
     } else {
@@ -203,6 +267,149 @@ module.exports = {
       res.status(200).send(false);
     } else {
       res.send(seq);
+    }
+  },
+  LocationTransfer: async (req, res) => {
+    const { from, to } = req.params;
+    let fromType;
+    let toType;
+    const fromLocArr = from.split("@");
+    const toLocArr = to.split("@");
+
+    switch (from.split("@").length) {
+      case 2:
+        fromType = "warehouse_names";
+        break;
+
+      case 3:
+        fromType = "location_names";
+        break;
+
+      case 4:
+        fromType = "box_names";
+        break;
+
+      case 5:
+        fromType = "product_names";
+        break;
+
+      default:
+        fromType = "";
+        break;
+    }
+
+    switch (to.split("@").length) {
+      case 1:
+        toType = "company";
+        break;
+
+      case 2:
+        toType = "warehouse";
+        break;
+
+      case 3:
+        toType = "location";
+        break;
+
+      case 4:
+        toType = "box";
+        break;
+
+      default:
+        toType = "";
+        break;
+    }
+
+    seq = await sequelize.query(
+      `UPDATE ${fromType} SET parent_location = '${
+        toLocArr[toLocArr.length - 1] + " " + toType
+      }' WHERE name = '${fromLocArr[fromLocArr.length - 1]}' And user_id = ${
+        req.session.user.id
+      };`
+    );
+
+    res.status(200).send(fromType);
+  },
+  Sales: async (req, res) => {
+    const {
+      type,
+      itemId,
+      quantity,
+      date,
+      address,
+      compName,
+      shipping,
+      contact,
+      customer,
+      weight,
+      orderId,
+      box,
+    } = req.fields;
+
+    switch (type) {
+      case "SalesOrder":
+        sequelize.query(
+          `insert into sales_order(user_id, itemid, quantity, date, customer_id, closed) values(${req.session.user.id}, '${itemId}',${quantity}, '${date}', ${customer}, false)`
+        );
+
+        res.status(200).send("Finished");
+        break;
+      case "Delivery":
+        const container = JSON.parse(box);
+        console.log(container);
+        for (let cont of container) {
+          console.log(cont);
+          contArr = cont.split("@");
+          const boxId = await sequelize.query(
+            `select box_names_id from box_names where name = '${
+              contArr[contArr.length - 1]
+            }' AND parent_location = '${contArr[contArr.length - 2]} location'`
+          );
+
+          sequelize.query(
+            `insert into delivery_order_box(box_names_id, sales_order_id) values(${boxId[0][0].box_names_id}, ${orderId})`
+          );
+          sequelize.query(
+            `Update box_names set quantity = quantity - ${quantity} where box_names_id = ${boxId[0][0].box_names_id}`
+          );
+        }
+
+        sequelize.query(
+          `insert into delivery_order(sales_order_id, weight, delivery_order_box_id) values(${orderId}, ${weight}, ${orderId})`
+        );
+
+        res.status(200).send("Finished");
+        break;
+
+      case "Customer":
+        sequelize.query(
+          `insert into customer_names(user_id, address, name, shipping, customer) values(${req.session.user.id}, '${address}','${compName}', '${shipping}', '${contact}')`
+        );
+
+        res.status(200).send("Finished");
+        break;
+    }
+  },
+  SalesQuery: async (req, res) => {
+    const { type, query, filter } = req.params;
+
+    if (type === "delivery_order") {
+      if (filter === "delivery_order_id") {
+        const seq = await sequelize.query(
+          `Select * From delivery_order d, sales_order s where d.${filter} = '${query}' And s.user_id = ${req.session.user.id} And d.sales_order_id = s.sales_order_id;`
+        );
+        res.status(200).send(seq);
+      } else {
+        const seq = await sequelize.query(
+          `Select * From delivery_order d, sales_order s where s.${filter} = '${query}' And s.user_id = ${req.session.user.id} And d.sales_order_id = s.sales_order_id;`
+        );
+        res.status(200).send(seq);
+      }
+    } else {
+      const seq = await sequelize.query(
+        `Select * From ${type} where ${filter} = '${query}' And user_id = ${req.session.user.id} ;`
+      );
+      res.status(200).send(seq);
     }
   },
 };

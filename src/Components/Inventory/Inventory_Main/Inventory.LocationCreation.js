@@ -9,6 +9,7 @@ function LocationCreation() {
   const [description, setDescription] = useState("");
   const [itemId, setItemId] = useState("");
   const [scannerBool, setScannerBool] = useState(false);
+  const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
     const container = document.getElementById("Container");
@@ -50,7 +51,8 @@ function LocationCreation() {
           productId,
           description,
           itemId,
-          true
+          true,
+          quantity
         )
       }
     >
@@ -82,6 +84,9 @@ function LocationCreation() {
           setContainerLocation={setContainerLocation}
           setScannerBool={setScannerBool}
           displayDesc={true}
+          quantity={0}
+          setQuantity={setQuantity}
+          displayQty={false}
         />
         <QrRecoveryHomeSection
           name="box"
@@ -95,6 +100,9 @@ function LocationCreation() {
           setContainerLocation={setContainerLocation}
           setScannerBool={setScannerBool}
           displayDesc={true}
+          quantity={quantity}
+          setQuantity={setQuantity}
+          displayQty={true}
         />
         <QrRecoveryHomeSection
           name="location"
@@ -108,6 +116,9 @@ function LocationCreation() {
           setContainerLocation={setContainerLocation}
           setScannerBool={setScannerBool}
           displayDesc={true}
+          quantity={0}
+          setQuantity={setQuantity}
+          displayQty={false}
         />
         <QrRecoveryHomeSection
           name="warehouse"
@@ -121,6 +132,9 @@ function LocationCreation() {
           setContainerLocation={setContainerLocation}
           setScannerBool={setScannerBool}
           displayDesc={true}
+          quantity={0}
+          setQuantity={setQuantity}
+          displayQty={false}
         />
         <div id="company" className="displayNone">
           <div id="companyContainer" className="displayFlex">
@@ -140,6 +154,7 @@ function LocationCreation() {
               cols="30"
               placeholder={"Company Description"}
               value={description}
+              id="textarea"
               onChange={(e) => {
                 setDescription(e.target.value);
               }}

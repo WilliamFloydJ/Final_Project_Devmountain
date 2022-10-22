@@ -1,5 +1,7 @@
 article {
+  margin: 0;
   width: 99vw;
+  height: 100vh;
   padding-top: 5vw;
   padding-bottom: 6vw;
   border-radius: 0 0 2.5vw 2.5vw;

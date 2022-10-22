@@ -19,6 +19,7 @@
   box-shadow: 0.1vw 0.2vw 0.2vw #000000;
 }
 .ScanHome input,
+#Account input,
 .ScanHome button,
 .ScanHome select {
   width: fit-content;
@@ -30,6 +31,10 @@
   transition: all 0.2s;
   font-family: "Smythe";
   font-size: 1.5vw;
+}
+
+#Account input ::placeholder {
+  color: #0000007e;
 }
 
 .ScanHome input::placeholder {
@@ -97,19 +102,26 @@ canvas {
 .videoContainer > img:hover {
   width: 11vw;
 }
-
+.fitContent {
+  width: 14vw;
+  margin-left: 0.25vw;
+  margin-right: 0.25vw;
+}
 .column {
   display: flex;
-  flex-direction: column;
+  flex-direction: column !important;
 }
 .row {
   display: flex;
-  flex-direction: row;
+  flex-direction: row !important;
 }
 .width {
   width: 100%;
   align-items: center;
   justify-content: center;
+}
+.noSpace {
+  margin: 0;
 }
 .space-out {
   margin-left: 2vw;
@@ -133,6 +145,16 @@ canvas {
   font-size: 4vw;
   font-weight: 300;
   text-shadow: #532600 0.1vw 0.1vw 0.15vw;
+}
+.Delivery .text {
+  font-size: 3vw;
+}
+.small {
+  font-size: 2vw !important;
+}
+.center {
+  align-items: center;
+  justify-content: center;
 }
 .groupColor {
   border-radius: 0.5vw;

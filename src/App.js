@@ -11,7 +11,12 @@ import Inventory from "./Pages/InventoryPage";
 import QRScan from "./Pages/QR.Scan.Page";
 import QRRecover from "./Pages/QR.Recover.Page";
 import LocationCreationPage from "./Pages/Inventory.LocationCreation.Page";
+import InventoryTransferPage from "./Pages/Inventory.Transfer.Page";
 import InventorySearchPage from "./Pages/Inventory.Search.Page";
+import ItemIdPage from "./Pages/Inventory.ItemId.Page";
+import SalesOrderPage from "./Pages/Sales.SalesOrder.Page";
+import DeliveryOrderPage from "./Pages/Sales.DeliveryOrder.Page";
+import CustomerCreationPage from "./Pages/Sales.CustomerCreation.Page";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -51,8 +56,28 @@ function App() {
               element={loggedIn ? <InventorySearchPage /> : <LoginPage />}
             />
             <Route
+              path="ItemId"
+              element={loggedIn ? <ItemIdPage /> : <LoginPage />}
+            />
+            <Route
               path="LocationCreation"
               element={loggedIn ? <LocationCreationPage /> : <LoginPage />}
+            />
+            <Route
+              path="LocationTransfer"
+              element={loggedIn ? <InventoryTransferPage /> : <LoginPage />}
+            />
+            <Route
+              path="CustomerCreation"
+              element={loggedIn ? <CustomerCreationPage /> : <LoginPage />}
+            />
+            <Route
+              path="SalesOrder"
+              element={loggedIn ? <SalesOrderPage /> : <LoginPage />}
+            />
+            <Route
+              path="DeliveryOrder"
+              element={loggedIn ? <DeliveryOrderPage /> : <LoginPage />}
             />
           </Route>
         </Routes>

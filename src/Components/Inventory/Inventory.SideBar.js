@@ -33,11 +33,11 @@ function SideBar() {
           <div id="inventory">
             <a href="/Inventory/InventoryList">Inventory List</a>
 
+            <a href="/Inventory/ItemId">Item Id Creation</a>
+
             <a href="/Inventory/LocationCreation">Location Creation</a>
 
-            <a href="/Inventory/ProductCreation">Product Creation</a>
-
-            <a href="/Inventory/Preferences">Inventory Preferences</a>
+            <a href="/Inventory/LocationTransfer">Location Transfer</a>
           </div>
         </button>
 
@@ -48,10 +48,6 @@ function SideBar() {
 
             <a href="/Inventory/DeliveryOrder">Delivery Orders</a>
 
-            <a href="/Inventory/ReturnRequest">Return Request</a>
-
-            <a href="/Inventory/ReturnOrder">Return Order</a>
-
             <a href="/Inventory/CustomerCreation">Customer Creation</a>
           </div>
         </button>
@@ -60,22 +56,6 @@ function SideBar() {
           Purchasing
           <div id="purchasing">
             <a href="/Inventory/PurchaseOrder">Purchase Order</a>
-          </div>
-        </button>
-
-        <button onClick={(event) => dropDownOpen("accounting")}>
-          Accounting
-          <div id="accounting">
-            <a href="/Inventory/ACInvoicing">Account Invoicing</a>
-          </div>
-        </button>
-
-        <button onClick={(event) => dropDownOpen("HR")}>
-          Human Resources
-          <div id="HR">
-            <a href="/Inventory/EmployeeCreation">Employee Creation</a>
-
-            <a href="/Inventory/EmployeeRecord">Employee Record</a>
           </div>
         </button>
       </ul>

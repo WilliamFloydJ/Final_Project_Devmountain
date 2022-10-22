@@ -10,7 +10,8 @@ async function qrCreationSubmission(
   productId,
   description,
   itemId,
-  create
+  create,
+  quantity
 ) {
   e.preventDefault();
 
@@ -19,6 +20,9 @@ async function qrCreationSubmission(
   console.log(container);
   const submitBtn = document.getElementById("submitBtn");
   const selectBtn = document.getElementById("selectBtn");
+  if (document.getElementById("textarea")) {
+    document.getElementById("textarea").classList.add("displayNone");
+  }
 
   container.classList.remove("displayFlex");
   container.classList.add("displayNone");
@@ -53,13 +57,11 @@ async function qrCreationSubmission(
         }@${productId}`,
       };
     }
-    let locCreated = await axios(`/api/LocationCheck/${body.data}`);
+    let locCreated = await axios.get(`/api/LocationCheck/${body.data}`);
     if (
       (locCreated.data === false && create === true) ||
       (locCreated.data === true && create === false)
     ) {
-      console.log({ locCreated }, { create });
-
       axios
         .get(
           `https://chart.googleapis.com/chart?cht=qr&chs=500x500&chl=${body.data}`,
@@ -135,6 +137,7 @@ async function qrCreationSubmission(
         formData.append("data", body.data);
         formData.append("description", description);
         formData.append("itemId", itemId);
+        formData.append("quantity", quantity);
         formData.append("type", containerOption);
 
         const res = await axios.post("/api/QrCreate", formData, {
