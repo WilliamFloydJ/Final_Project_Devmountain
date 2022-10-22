@@ -35,6 +35,7 @@
   "scripts": {
     "dev": "concurrently \"npm run server-dev\" \"npm run start\"",
     "server-dev": "nodemon server/index.js",
+    "production": "concurrently \"npm run server\" \"npm run start\"",
     "server": "node server/index.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
